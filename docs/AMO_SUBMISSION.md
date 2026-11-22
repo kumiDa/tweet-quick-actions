@@ -134,7 +134,7 @@ to the clipboard without opening any menu. It takes the /user/status/id prefix
 from any of the post's own links, so it also works on posts that render no
 plain permalink.
 
-All logic is in content.js (about 190 lines, unminified). There is no
+All logic is in src/content.js (about 190 lines, unminified). There is no
 background script, no remote code, no eval, no network requests, and no data
 collection or storage of any kind.
 
@@ -177,19 +177,19 @@ Source: https://github.com/kumiDa/tweet-quick-actions
 
 ## Logo / icon
 
-The listing icon comes from the manifest: `icon-48.png`, `icon-96.png` and
-`icon-128.png`. A blue rounded square holding two white text bars over a row
+The listing icon comes from the manifest: `icons/icon-48.png`, `icons/icon-96.png`
+and `icons/icon-128.png`. A blue rounded square holding two white text bars over a row
 of three dots, the last one filled — a post with its action bar, one action
-highlighted. Upload `icon-128.png` if AMO asks for an icon separately.
+highlighted. Upload `icons/icon-128.png` if AMO asks for an icon separately.
 
-`icon.svg` is the source of truth. Regenerate the PNGs after editing it:
+`icons/icon.svg` is the source of truth. Regenerate the PNGs after editing it:
 
 ```sh
-python3 tools/rasterize.py .
+python3 tools/rasterize.py icons
 ```
 
 That script is stdlib-only and re-checks its hard-coded shapes against
-`icon.svg` before rendering, so it fails loudly if the two drift apart.
+`icons/icon.svg` before rendering, so it fails loudly if the two drift apart.
 
 ## Screenshot alt text
 

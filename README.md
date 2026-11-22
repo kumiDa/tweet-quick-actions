@@ -24,7 +24,7 @@ bookmarks).
 
 1. Open `about:debugging#/runtime/this-firefox`
 2. **Load Temporary Add-on…**
-3. Pick `manifest.json` from this folder
+3. Pick `manifest.json` from this folder (it stays at the repo root)
 
 Gone on every Firefox restart. Repeat to re-add.
 
@@ -35,7 +35,7 @@ Release Firefox only installs **signed** add-ons. Zip the sources and upload to
 and gives you an `.xpi` you can install for good.
 
 ```sh
-zip -r tweet-quick-actions.zip manifest.json content.js content.css icon.svg README.md LICENSE
+zip -r tweet-quick-actions.zip manifest.json src icons README.md LICENSE
 ```
 
 (Alternatively run Firefox Developer Edition / Nightly with
@@ -51,7 +51,7 @@ zip -r tweet-quick-actions.zip manifest.json content.js content.css icon.svg REA
   - x.com denies `navigator.clipboard.writeText` in the page context, so Copy
     link falls back to `document.execCommand("copy")`.
 - Menu labels are matched as English text. For another UI language, edit the
-  regexes in `ACTIONS` in `content.js`.
+  regexes in `ACTIONS` in `src/content.js`.
 - A button flashes red when its action isn't available for that post (for
   example "Not interested" on your own tweets), green when a link is copied.
 - Copy link reads the `/user/status/id` prefix from any of the post's links
