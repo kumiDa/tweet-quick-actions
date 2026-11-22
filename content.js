@@ -5,14 +5,18 @@
 
   const MARK = "data-nib";
 
-  // shortcut: matches the English menu labels only. If you use X in another
-  // language, add its wording to the regexes in ACTIONS.
+  // Built as real nodes rather than innerHTML strings: AMO's linter flags any
+  // innerHTML assignment, and cloning a template node is just as cheap.
   const icon = (inner) =>
-    '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" ' +
-    'fill="none" stroke="currentColor" stroke-width="2" ' +
-    'stroke-linecap="round" stroke-linejoin="round">' +
-    inner +
-    "</svg>";
+    new DOMParser().parseFromString(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" ' +
+        'width="18" height="18" aria-hidden="true" fill="none" ' +
+        'stroke="currentColor" stroke-width="2" stroke-linecap="round" ' +
+        'stroke-linejoin="round">' +
+        inner +
+        "</svg>",
+      "image/svg+xml"
+    ).documentElement;
 
   const ICONS = {
     notInterested: icon('<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>'),
@@ -67,11 +71,13 @@
 
   // The permalink is already in the DOM, so this needs no menu at all.
   async function copyLink(article, btn) {
-    const a = [...article.querySelectorAll('a[href*="/status/"]')].find((el) =>
-      /^\/[^/]+\/status\/\d+$/.test(new URL(el.href).pathname)
-    );
-    if (!a) return fail(btn);
-    if (!(await writeClipboard(location.origin + new URL(a.href).pathname))) {
+    // Match the /user/status/id prefix, not the whole path: some tweets only
+    // expose the link via its /analytics or /photo/1 variant.
+    const path = [...article.querySelectorAll('a[href*="/status/"]')]
+      .map((el) => new URL(el.href).pathname.match(/^\/[^/]+\/status\/\d+/))
+      .find(Boolean);
+    if (!path) return fail(btn);
+    if (!(await writeClipboard(location.origin + path[0]))) {
       return fail(btn);
     }
     flash(btn, "nib-ok", ICONS.done, "Link copied");
@@ -128,21 +134,17 @@
 
   const STATE_CLASSES = ["nib-ok", "nib-failed"];
 
+  // Restores from the button's own pristine icon, so a second click inside the
+  // timeout cannot strand the flashed icon.
   function flash(btn, cls, svg, title) {
-    // Capture the pristine icon once: a second click inside the timeout would
-    // otherwise save the flashed icon as the original and leave it stuck.
-    if (btn._nibIcon === undefined) {
-      btn._nibIcon = btn.innerHTML;
-      btn._nibTitle = btn.title;
-    }
     clearTimeout(btn._nibTimer);
     btn.classList.remove(...STATE_CLASSES);
     btn.classList.add(cls);
-    if (svg) btn.innerHTML = svg;
+    if (svg) btn.replaceChildren(svg.cloneNode(true));
     btn.title = title;
     btn._nibTimer = setTimeout(() => {
       btn.classList.remove(...STATE_CLASSES);
-      btn.innerHTML = btn._nibIcon;
+      btn.replaceChildren(btn._nibIcon.cloneNode(true));
       btn.title = btn._nibTitle;
     }, 1400);
   }
@@ -167,7 +169,9 @@
       btn.className = "nib-btn " + action.cls;
       btn.title = action.title;
       btn.setAttribute("aria-label", action.title);
-      btn.innerHTML = action.svg;
+      btn._nibIcon = action.svg;
+      btn._nibTitle = action.title;
+      btn.replaceChildren(action.svg.cloneNode(true));
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();

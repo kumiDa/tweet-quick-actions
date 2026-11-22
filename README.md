@@ -51,8 +51,10 @@ zip -r tweet-quick-actions.zip manifest.json content.js content.css icon.svg REA
   regexes in `ACTIONS` in `content.js`.
 - A button flashes red when its action isn't available for that post (for
   example "Not interested" on your own tweets), green when a link is copied.
-- Promoted posts have no permalink, so Copy link flashes red on them rather
-  than copying something wrong.
+- Copy link reads the `/user/status/id` prefix from any of the post's links
+  (the timestamp, a photo or the analytics link), so it works even on posts
+  that render no plain permalink. Quoted posts are `div[role="link"]`, not
+  anchors, so the outer post's link is always the one copied.
 - The gecko add-on ID is `tweet-quick-actions@local`. Don't change it once AMO
   has signed a build, or Firefox treats it as a different add-on.
 

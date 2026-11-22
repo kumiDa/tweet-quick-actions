@@ -46,7 +46,7 @@ Report and Request Community Note open X's own flows, which you complete yoursel
 
 Copy link reads the post's permalink straight from the page and copies it, with a green tick to confirm.
 
-If an action isn't available for a post (for example "Not interested" on your own posts, or "Copy link" on a promoted post), the button flashes red and does nothing.
+If an action isn't available for a post (for example "Not interested" on your own posts), the button flashes red and does nothing.
 
 The add-on works only on x.com and twitter.com. It collects no data, makes no network requests of its own, and has no servers, accounts or analytics.
 ```
@@ -105,7 +105,9 @@ them click X's own existing menu items on the user's behalf:
   - "Report post"                   (X's ... menu)
 
 The fourth, "Copy link", reads the post's permalink from the page and copies it
-to the clipboard without opening any menu.
+to the clipboard without opening any menu. It takes the /user/status/id prefix
+from any of the post's own links, so it also works on posts that render no
+plain permalink.
 
 All logic is in content.js (about 190 lines, unminified). There is no
 background script, no remote code, no eval, no network requests, and no data
