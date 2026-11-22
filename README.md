@@ -5,10 +5,13 @@ for actions X buries behind its menus:
 
 | Button | What it does | How |
 |---|---|---|
+| 🔗 Copy link | copies the tweet's permalink | reads the permalink directly |
 | ⊖ Not interested | "Not interested in this post" | drives X's ⋯ menu |
 | 🗒 Community Note | "Request Community Note" | drives X's ⋯ menu |
 | ⚑ Report | "Report post" | drives X's ⋯ menu |
-| 🔗 Copy link | copies the tweet's permalink | reads the permalink directly |
+
+They run left to right from most-used and harmless to least-used and most
+serious, so Report sits at the far edge where a stray click is least likely.
 
 The three menu-driven actions click X's own menu items, so the real signal
 reaches X — this is not local hiding. Report and Community Note navigate to

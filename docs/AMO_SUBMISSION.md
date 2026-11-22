@@ -36,12 +36,14 @@ X buries its most useful per-post actions behind menus. "Not interested in this 
 
 Tweet Quick Actions adds four buttons to the action bar of every post, next to reply, repost and like:
 
+- Copy link
 - Not interested in this post
 - Request a Community Note
 - Report post
-- Copy link
 
-The first three click X's own menu items for you, so the signal reaches X exactly as if you had navigated the menu by hand. Nothing is hidden locally and nothing is faked.
+They are ordered from most-used and harmless to least-used and most serious, so Report sits at the far edge of the bar.
+
+The last three click X's own menu items for you, so the signal reaches X exactly as if you had navigated the menu by hand. Nothing is hidden locally and nothing is faked.
 
 Report and Request Community Note open X's own flows, which you complete yourself. Nothing is ever auto-submitted.
 
@@ -105,7 +107,7 @@ them click X's own existing menu items on the user's behalf:
   - "Request Community Note"        (X's ... menu)
   - "Report post"                   (X's ... menu)
 
-The fourth, "Copy link", reads the post's permalink from the page and copies it
+The remaining one, "Copy link", reads the post's permalink from the page and copies it
 to the clipboard without opening any menu. It takes the /user/status/id prefix
 from any of the post's own links, so it also works on posts that render no
 plain permalink.
@@ -121,15 +123,16 @@ visitors.
 
   1. Install and open https://x.com/home
   2. Four extra buttons appear at the end of each post's action bar, after
-     X's reply / repost / like / share buttons.
+     X's reply / repost / like / share buttons, in this order: chain,
+     circle-minus, note, flag.
   3. Click the chain icon (Copy link) - the icon briefly turns into a green
      tick and the post's URL is on the clipboard.
   4. Click the circle-minus icon (Not interested) - X replaces the post with
      its own "Thanks. X will use this to make your timeline better." row.
-  5. Click the flag icon (Report) - X's own report flow opens at
-     /i/safety/report_story_start. Nothing is submitted.
-  6. Click the note icon (Request a Community Note) - X's own note request
+  5. Click the note icon (Request a Community Note) - X's own note request
      page opens at /i/communitynotes/noterequest/<id>. Nothing is submitted.
+  6. Click the flag icon (Report) - X's own report flow opens at
+     /i/safety/report_story_start. Nothing is submitted.
 
 Implementation notes
 --------------------

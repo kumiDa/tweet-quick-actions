@@ -105,7 +105,15 @@
     return ok;
   }
 
+  // Ordered by how often each is used and how much damage a misclick does:
+  // the most-clicked first, the only serious one at the far edge.
   const ACTIONS = [
+    {
+      cls: "",
+      title: "Copy link",
+      svg: ICONS.copy,
+      run: copyLink,
+    },
     {
       cls: "nib-red",
       title: "Not interested in this post",
@@ -123,12 +131,6 @@
       title: "Report post",
       svg: ICONS.report,
       run: (a, b) => viaCaretMenu(a, b, /report post/i),
-    },
-    {
-      cls: "",
-      title: "Copy link",
-      svg: ICONS.copy,
-      run: copyLink,
     },
   ];
 
