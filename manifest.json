@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Not Interested Button",
+  "version": "1.0",
+  "description": "Adds a one-click \"Not interested in this post\" button to every tweet's action bar.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "not-interested-button@local",
+      "strict_min_version": "115.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://x.com/*", "*://twitter.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
