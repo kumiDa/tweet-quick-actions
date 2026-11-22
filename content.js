@@ -126,15 +126,24 @@
     },
   ];
 
+  const STATE_CLASSES = ["nib-ok", "nib-failed"];
+
   function flash(btn, cls, svg, title) {
-    const old = { html: btn.innerHTML, title: btn.title };
+    // Capture the pristine icon once: a second click inside the timeout would
+    // otherwise save the flashed icon as the original and leave it stuck.
+    if (btn._nibIcon === undefined) {
+      btn._nibIcon = btn.innerHTML;
+      btn._nibTitle = btn.title;
+    }
+    clearTimeout(btn._nibTimer);
+    btn.classList.remove(...STATE_CLASSES);
     btn.classList.add(cls);
     if (svg) btn.innerHTML = svg;
     btn.title = title;
-    setTimeout(() => {
-      btn.classList.remove(cls);
-      btn.innerHTML = old.html;
-      btn.title = old.title;
+    btn._nibTimer = setTimeout(() => {
+      btn.classList.remove(...STATE_CLASSES);
+      btn.innerHTML = btn._nibIcon;
+      btn.title = btn._nibTitle;
     }, 1400);
   }
 

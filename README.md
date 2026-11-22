@@ -32,7 +32,7 @@ Release Firefox only installs **signed** add-ons. Zip the sources and upload to
 and gives you an `.xpi` you can install for good.
 
 ```sh
-zip -r tweet-quick-actions.zip manifest.json content.js content.css README.md
+zip -r tweet-quick-actions.zip manifest.json content.js content.css icon.svg README.md LICENSE
 ```
 
 (Alternatively run Firefox Developer Edition / Nightly with
@@ -51,3 +51,11 @@ zip -r tweet-quick-actions.zip manifest.json content.js content.css README.md
   regexes in `ACTIONS` in `content.js`.
 - A button flashes red when its action isn't available for that post (for
   example "Not interested" on your own tweets), green when a link is copied.
+- Promoted posts have no permalink, so Copy link flashes red on them rather
+  than copying something wrong.
+- The gecko add-on ID is `tweet-quick-actions@local`. Don't change it once AMO
+  has signed a build, or Firefox treats it as a different add-on.
+
+## Licence
+
+MIT, see [LICENSE](LICENSE).
