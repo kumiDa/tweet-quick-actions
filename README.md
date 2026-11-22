@@ -1,8 +1,18 @@
-# Not Interested Button
+# Tweet Quick Actions
 
-Adds a button to every tweet's action bar (next to reply/retweet/like) that
-opens X's own ⋯ menu, clicks **"Not interested in this post"**, and closes it —
-so the real signal reaches X's algorithm.
+A Firefox add-on that puts four one-click buttons in every tweet's action bar
+for actions X buries behind its menus:
+
+| Button | What it does | How |
+|---|---|---|
+| ⊖ Not interested | "Not interested in this post" | drives X's ⋯ menu |
+| 🗒 Community Note | "Request Community Note" | drives X's ⋯ menu |
+| ⚑ Report | "Report post" | drives X's ⋯ menu |
+| 🔗 Copy link | copies the tweet's permalink | reads the permalink directly |
+
+The three menu-driven actions click X's own menu items, so the real signal
+reaches X — this is not local hiding. Report and Community Note navigate to
+X's own flows, which you then complete yourself; nothing is auto-submitted.
 
 Works on `x.com` and `twitter.com`, on any timeline (home, profile, search,
 bookmarks).
@@ -17,16 +27,27 @@ Gone on every Firefox restart. Repeat to re-add.
 
 ## Install permanently
 
-Release Firefox only installs **signed** add-ons. Upload
-`not-interested-button.zip` to <https://addons.mozilla.org/developers/> as an
-unlisted add-on; AMO signs it and gives you an `.xpi` you can install for good.
+Release Firefox only installs **signed** add-ons. Zip the sources and upload to
+<https://addons.mozilla.org/developers/> as an unlisted add-on; AMO signs it
+and gives you an `.xpi` you can install for good.
+
+```sh
+zip -r tweet-quick-actions.zip manifest.json content.js content.css README.md
+```
+
 (Alternatively run Firefox Developer Edition / Nightly with
 `xpinstall.signatures.required=false` in `about:config`.)
 
 ## Notes
 
-- The ⋯ menu offers "Not interested" only for posts from accounts you don't
-  follow, and never for your own — the button flashes red when the item isn't
-  there.
-- The menu label is matched as English text. For another UI language, edit the
-  `LABEL` regex in `content.js`.
+- Verified against live x.com. Three behaviours the implementation depends on:
+  - X leaves closed dropdowns in the DOM, so the code reads only the menu that
+    appeared *after* it clicked the caret — otherwise it acts on the wrong tweet.
+  - The dropdown only closes by toggling the caret again; synthetic `Escape` is
+    ignored.
+  - x.com denies `navigator.clipboard.writeText` in the page context, so Copy
+    link falls back to `document.execCommand("copy")`.
+- Menu labels are matched as English text. For another UI language, edit the
+  regexes in `ACTIONS` in `content.js`.
+- A button flashes red when its action isn't available for that post (for
+  example "Not interested" on your own tweets), green when a link is copied.

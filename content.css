@@ -1,14 +1,15 @@
 .nib-slot {
   display: flex;
   align-items: center;
+  gap: 2px;
   margin-left: 4px;
 }
 .nib-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   padding: 0;
   border: 0;
   border-radius: 9999px;
@@ -17,10 +18,20 @@
   cursor: pointer;
 }
 .nib-btn:hover {
+  color: rgb(29, 155, 240);
+  background: rgba(29, 155, 240, 0.1);
+}
+.nib-btn.nib-red:hover {
   color: rgb(244, 33, 46);
   background: rgba(244, 33, 46, 0.1);
 }
-.nib-btn.nib-failed {
+.nib-btn.nib-failed,
+.nib-btn.nib-failed:hover {
   color: rgb(244, 33, 46);
   background: rgba(244, 33, 46, 0.2);
+}
+.nib-btn.nib-ok,
+.nib-btn.nib-ok:hover {
+  color: rgb(0, 186, 124);
+  background: rgba(0, 186, 124, 0.15);
 }

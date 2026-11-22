@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Not Interested Button",
+  "name": "Tweet Quick Actions",
   "version": "1.0",
-  "description": "Adds a one-click \"Not interested in this post\" button to every tweet's action bar.",
+  "description": "One-click buttons on every tweet for Not interested, Request Community Note, Report, and Copy link.",
   "browser_specific_settings": {
     "gecko": {
       "id": "not-interested-button@local",
@@ -11,10 +11,20 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://x.com/*", "*://twitter.com/*"],
-      "js": ["content.js"],
-      "css": ["content.css"],
+      "matches": [
+        "*://x.com/*",
+        "*://twitter.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
       "run_at": "document_idle"
     }
+  ],
+  "permissions": [
+    "clipboardWrite"
   ]
 }
