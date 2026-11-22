@@ -11,8 +11,9 @@ Upload: `tweet-quick-actions-1.1.zip`
 
 - [ ] **Make the GitHub repo public.** The support/homepage URL below must be
       reachable, and listed reviewers will look at the source.
-- [ ] Decide whether the screenshot is OK to publish — it shows a real user's
-      post from your timeline. Replace it if you'd rather not.
+- [ ] Upload `docs/screenshot.jpg` as the listing screenshot. It shows posts
+      from @X, the platform's own account, so no private individual's content
+      is republished on your listing page.
 
 ---
 
