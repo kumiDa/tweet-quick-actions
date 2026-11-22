@@ -1,9 +1,30 @@
 # AMO submission — copy/paste answers
 
-Submit at <https://addons.mozilla.org/developers/addon/submit/distribution>
-and choose **"On this site"** (listed).
-
 Upload: `tweet-quick-actions-1.1.zip`
+
+## The wizard, step by step
+
+1. Sign in to <https://addons.mozilla.org/developers/> with a **Mozilla
+   Account**. Read the Developer Agreement and Add-on Policies first.
+2. **Submit a New Add-on**.
+3. Distribution: choose **On this site** (listed) → Continue.
+4. **Upload Version** → Select a file → `tweet-quick-actions-1.1.zip`.
+   Validation runs here. Ours reports 0 errors, 0 warnings, 0 notices, so it
+   should pass straight through. Errors would block you; warnings would not.
+5. Select the compatible platforms. The manifest declares both Firefox 140+
+   and Firefox for Android 142+, so both apply — or mark Android incompatible
+   here if you'd rather not support it (it has never been tested there).
+6. **Source code**: answer **No**. Source is only required for hard-to-read
+   code; `content.js` is plain, unminified and unbundled.
+7. **Describe Add-on**: fill in the fields below → **Submit Version**.
+8. The **Version Submitted** page appears and you get a confirmation email.
+
+Mozilla's docs do not state a review timeframe, and do not say whether human
+review happens before or after the listing goes live — only that the add-on
+"may be subject to further review" and that you'll be notified.
+
+Later versions go on the add-on's own page on AMO, **not** through "Submit a
+New Add-on", or AMO treats them as a separate add-on.
 
 ---
 
@@ -54,21 +75,21 @@ If an action isn't available for a post (for example "Not interested" on your ow
 The add-on works only on x.com and twitter.com. It collects no data, makes no network requests of its own, and has no servers, accounts or analytics.
 ```
 
-## Category
+## Categories (up to 2 each)
 
 Firefox → **Social & Communication**
+Firefox for Android → **Social & Communication** (or mark Android
+incompatible at step 5)
 
-## Tags
+## Support email / Support website
 
-```
-twitter, x, timeline, algorithm, productivity
-```
-
-## Homepage / Support site
+Support website:
 
 ```
 https://github.com/kumiDa/tweet-quick-actions
 ```
+
+Use your own address for the support email.
 
 ## Licence
 
@@ -76,9 +97,10 @@ MIT (matches `LICENSE` in the repo)
 
 ## Privacy policy
 
-Not required — the add-on collects nothing. When AMO asks about data
-collection, answer **"Does not collect data"** and leave the privacy policy
-field empty.
+Leave **"This add-on has a privacy policy"** unticked. A policy is required
+only when data is transmitted off the user's device; this add-on transmits
+nothing and the manifest already declares
+`data_collection_permissions: {required: ["none"]}`.
 
 ---
 
@@ -95,7 +117,7 @@ only site access the add-on has.
 
 ---
 
-## Notes for reviewer
+## Notes for Reviewers
 
 ```
 What it does
