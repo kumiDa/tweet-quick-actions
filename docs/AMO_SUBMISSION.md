@@ -177,13 +177,19 @@ Source: https://github.com/kumiDa/tweet-quick-actions
 
 ## Logo / icon
 
-The listing icon comes from the manifest: `icon.svg`, declared at 48 and 96.
-A blue rounded square holding two white text bars over a row of three dots,
-the last one filled — a post with its action bar, one action highlighted.
+The listing icon comes from the manifest: `icon-48.png`, `icon-96.png` and
+`icon-128.png`. A blue rounded square holding two white text bars over a row
+of three dots, the last one filled — a post with its action bar, one action
+highlighted. Upload `icon-128.png` if AMO asks for an icon separately.
 
-AMO accepts SVG icons. If an upload ever rejects it, export a PNG at 128x128
-(open `icon.svg` in Firefox and screenshot, or any SVG-to-PNG converter) and
-add `"128": "icon.png"` to the manifest's `icons`.
+`icon.svg` is the source of truth. Regenerate the PNGs after editing it:
+
+```sh
+python3 tools/rasterize.py .
+```
+
+That script is stdlib-only and re-checks its hard-coded shapes against
+`icon.svg` before rendering, so it fails loudly if the two drift apart.
 
 ## Screenshot alt text
 
