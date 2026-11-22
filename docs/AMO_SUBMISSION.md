@@ -34,7 +34,7 @@ New Add-on", or AMO treats them as a separate add-on.
       reachable, and listed reviewers will look at the source.
 - [ ] Upload `docs/screenshot.jpg` as the listing screenshot. It shows posts
       from @X, the platform's own account, so no private individual's content
-      is republished on your listing page.
+      is republished on your listing page. Alt text below.
 
 ---
 
@@ -171,4 +171,20 @@ document.execCommand("copy"), because x.com denies the async clipboard API in
 the page context.
 
 Source: https://github.com/kumiDa/tweet-quick-actions
+```
+
+---
+
+## Screenshot alt text
+
+For `docs/screenshot.jpg`:
+
+```
+Three posts from the @X account on x.com. Each post's action bar ends with four buttons added by the add-on, after X's own reply, repost, like, views, bookmark and share icons: a chain link for Copy link, a circle containing a minus for Not interested, a lined note for Request a Community Note, and a flag for Report.
+```
+
+Shorter, if the field is length-limited:
+
+```
+An x.com timeline with four extra buttons on each post's action bar: Copy link, Not interested, Request a Community Note, and Report.
 ```
